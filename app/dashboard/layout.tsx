@@ -1,21 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  ChevronLeft,
   Home,
-  LineChart,
-  Package,
   Package2,
   PanelLeft,
-  PlusCircle,
+  ClipboardPenLine,
   Search,
   Settings,
-  ShoppingCart,
-  Upload,
-  Users2
+  Users2,
+  ListTodo
 } from 'lucide-react';
 
-import { Badge } from '@/components/ui/badge';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -101,7 +96,7 @@ export default async function DashboardLayout({
                   className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
                 >
                   <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Acme Inc</span>
+                  <span className="sr-only">Seekr</span>
                 </Link>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -119,13 +114,13 @@ export default async function DashboardLayout({
                   <TooltipTrigger asChild>
                     <Link
                       href="#"
-                      className="flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8"
+                      className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                     >
-                      <ShoppingCart className="h-5 w-5" />
-                      <span className="sr-only">Orders</span>
+                      <ClipboardPenLine className="h-5 w-5" />
+                      <span className="sr-only">Jobs</span>
                     </Link>
                   </TooltipTrigger>
-                  <TooltipContent side="right">Orders</TooltipContent>
+                  <TooltipContent side="right">Jobs</TooltipContent>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -133,11 +128,11 @@ export default async function DashboardLayout({
                       href="#"
                       className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                     >
-                      <Package className="h-5 w-5" />
-                      <span className="sr-only">Products</span>
+                      <ListTodo className="h-5 w-5" />
+                      <span className="sr-only">Activities</span>
                     </Link>
                   </TooltipTrigger>
-                  <TooltipContent side="right">Products</TooltipContent>
+                  <TooltipContent side="right">Activities</TooltipContent>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -146,22 +141,10 @@ export default async function DashboardLayout({
                       className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                     >
                       <Users2 className="h-5 w-5" />
-                      <span className="sr-only">Customers</span>
+                      <span className="sr-only">Contacts</span>
                     </Link>
                   </TooltipTrigger>
-                  <TooltipContent side="right">Customers</TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href="#"
-                      className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                    >
-                      <LineChart className="h-5 w-5" />
-                      <span className="sr-only">Analytics</span>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">Analytics</TooltipContent>
+                  <TooltipContent side="right">Contacts</TooltipContent>
                 </Tooltip>
               </nav>
               <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
@@ -196,7 +179,7 @@ export default async function DashboardLayout({
                       className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
                     >
                       <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                      <span className="sr-only">Acme Inc</span>
+                      <span className="sr-only">Seekr</span>
                     </Link>
                     <Link
                       href="#"
@@ -209,30 +192,30 @@ export default async function DashboardLayout({
                       href="#"
                       className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                     >
-                      <ShoppingCart className="h-5 w-5" />
-                      Orders
+                      <ClipboardPenLine className="h-5 w-5" />
+                      Jobs
                     </Link>
                     <Link
                       href="#"
                       className="flex items-center gap-4 px-2.5 text-foreground"
                     >
-                      <Package className="h-5 w-5" />
-                      Products
+                      <ListTodo className="h-5 w-5" />
+                      Activities
                     </Link>
                     <Link
                       href="#"
                       className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                     >
                       <Users2 className="h-5 w-5" />
-                      Customers
+                      Contacts
                     </Link>
-                    <Link
+                    {/* <Link
                       href="#"
                       className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                     >
                       <LineChart className="h-5 w-5" />
                       Settings
-                    </Link>
+                    </Link> */}
                   </nav>
                 </SheetContent>
               </Sheet>
@@ -271,7 +254,7 @@ export default async function DashboardLayout({
                     className="overflow-hidden rounded-full"
                   >
                     <Image
-                      src="/placeholder-user.jpg"
+                      src="/opengraph-image.png"
                       width={36}
                       height={36}
                       alt="Avatar"
@@ -287,9 +270,7 @@ export default async function DashboardLayout({
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={signOut}>
                     <form action={signOut}>
-                      <button>
-                        Logout
-                      </button>
+                      <button>Logout</button>
                     </form>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
