@@ -1,16 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  Home,
-  Package2,
-  PanelLeft,
-  ClipboardPenLine,
-  Search,
-  Settings,
-  Users2,
-  ListTodo
-} from 'lucide-react';
-
+import { PanelLeft, Search } from 'lucide-react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,14 +10,8 @@ import {
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
+import { SideNavigation, SlideOutNavigation } from '@/components/ui/navigation';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,33 +21,10 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from '@/components/ui/table';
-import { Textarea } from '@/components/ui/textarea';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-  TooltipProvider
-} from '@/components/ui/tooltip';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
+import { NextPageContext } from 'next';
 
 export default async function DashboardLayout({
   children
@@ -88,81 +49,7 @@ export default async function DashboardLayout({
     <div className="relative flex min-hscreen flex-col bg-background">
       <div className="w-full h-full">
         <div className="flex min-h-screen w-full flex-col bg-muted/40">
-          <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
-            <TooltipProvider>
-              <nav className="flex flex-col items-center gap-4 px-2 py-4">
-                <Link
-                  href="#"
-                  className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-                >
-                  <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Seekr</span>
-                </Link>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href="#"
-                      className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                    >
-                      <Home className="h-5 w-5" />
-                      <span className="sr-only">Dashboard</span>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">Dashboard</TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href="#"
-                      className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                    >
-                      <ClipboardPenLine className="h-5 w-5" />
-                      <span className="sr-only">Jobs</span>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">Jobs</TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href="#"
-                      className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                    >
-                      <ListTodo className="h-5 w-5" />
-                      <span className="sr-only">Activities</span>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">Activities</TooltipContent>
-                </Tooltip>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href="#"
-                      className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                    >
-                      <Users2 className="h-5 w-5" />
-                      <span className="sr-only">Contacts</span>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">Contacts</TooltipContent>
-                </Tooltip>
-              </nav>
-              <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Link
-                      href="#"
-                      className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                    >
-                      <Settings className="h-5 w-5" />
-                      <span className="sr-only">Settings</span>
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent side="right">Settings</TooltipContent>
-                </Tooltip>
-              </nav>
-            </TooltipProvider>
-          </aside>
+          <SideNavigation />
           <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
             <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
               <Sheet>
@@ -173,50 +60,7 @@ export default async function DashboardLayout({
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="sm:max-w-xs">
-                  <nav className="grid gap-6 text-lg font-medium">
-                    <Link
-                      href="#"
-                      className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-                    >
-                      <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                      <span className="sr-only">Seekr</span>
-                    </Link>
-                    <Link
-                      href="#"
-                      className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                    >
-                      <Home className="h-5 w-5" />
-                      Dashboard
-                    </Link>
-                    <Link
-                      href="#"
-                      className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                    >
-                      <ClipboardPenLine className="h-5 w-5" />
-                      Jobs
-                    </Link>
-                    <Link
-                      href="#"
-                      className="flex items-center gap-4 px-2.5 text-foreground"
-                    >
-                      <ListTodo className="h-5 w-5" />
-                      Activities
-                    </Link>
-                    <Link
-                      href="#"
-                      className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                    >
-                      <Users2 className="h-5 w-5" />
-                      Contacts
-                    </Link>
-                    {/* <Link
-                      href="#"
-                      className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                    >
-                      <LineChart className="h-5 w-5" />
-                      Settings
-                    </Link> */}
-                  </nav>
+                  <SlideOutNavigation />
                 </SheetContent>
               </Sheet>
               <Breadcrumb className="hidden md:flex">
